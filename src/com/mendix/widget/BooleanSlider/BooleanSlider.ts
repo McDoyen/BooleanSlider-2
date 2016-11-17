@@ -55,7 +55,7 @@ class BooleanSlider extends WidgetBase {
 
     private executeAction(actionname: string, guids: string[]) {
         if (actionname) {
-            mx.data.action({
+            window.mx.data.action({
                 params: {
                     applyto: "selection",
                     actionname,
@@ -63,7 +63,7 @@ class BooleanSlider extends WidgetBase {
                 },
                 origin: this.mxform,
                 error: (error: Error) =>
-                    console.log("An error occurred while executing microflow:", error.message)
+                    window.mx.ui.error("An error occurred while executing microflow: " + error.message, true)
             });
         }
     }
