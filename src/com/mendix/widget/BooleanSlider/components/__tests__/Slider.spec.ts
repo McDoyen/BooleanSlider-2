@@ -12,10 +12,11 @@ describe("Slider", () => {
 
     beforeEach(() => {
         sliderProps = {
-            widgetId: "slider",
-            onClick: () => {},
+            enabled: true,
+            hasError: false,
             isChecked: true,
-            enabled: true
+            onClick: () => { console.log("clicked"); },
+            widgetId: "slider"
         };
         slider = shallow(createElement(Slider, sliderProps));
         checkbox = slider.find("input.mx-toggle");
@@ -46,14 +47,15 @@ describe("Slider", () => {
 
         beforeEach(() => {
             sliderProps = {
-                widgetId: "slider",
+                enabled: true,
+                hasError: false,
+                isChecked: true,
                 onClick: () => {
                     sliderProps.isChecked = false;
                     slider.setProps(sliderProps);
                     checkbox = slider.find("input.mx-toggle");
                 },
-                isChecked: true,
-                enabled: true
+                widgetId: "slider"
             };
 
             slider = shallow(createElement(Slider, sliderProps));
@@ -76,14 +78,15 @@ describe("Slider", () => {
 
         beforeEach(() => {
             sliderProps = {
-                widgetId: "slider",
+                enabled: true,
+                hasError: false,
+                isChecked: false,
                 onClick: () => {
                     sliderProps.isChecked = true;
                     slider.setProps(sliderProps);
                     checkbox = slider.find("input.mx-toggle");
                 },
-                isChecked: false,
-                enabled: true
+                widgetId: "slider"
             };
 
             slider = shallow(createElement(Slider, sliderProps));
@@ -107,14 +110,15 @@ describe("Slider", () => {
 
         beforeEach(() => {
             sliderProps = {
-                widgetId: "slider",
+                enabled: true,
+                hasError: false,
+                isChecked: true,
                 onClick: () => {
                     sliderProps.isChecked = !sliderProps.isChecked;
                     slider.setProps(sliderProps);
                     checkbox = slider.find("input.mx-toggle");
                 },
-                isChecked: true,
-                enabled: true
+                widgetId: "slider"
             };
 
             slider = shallow(createElement(Slider, sliderProps));
@@ -141,10 +145,11 @@ describe("Slider", () => {
 
             beforeEach(() => {
                 sliderProps = {
-                    widgetId: "slider",
-                    onClick: () => {},
+                    enabled: true,
+                    hasError: false,
                     isChecked: false,
-                    enabled: true
+                    onClick: () => { console.log("clicked"); },
+                    widgetId: "slider"
                 };
                 slider = shallow(createElement(Slider, sliderProps));
                 checkbox = slider.find("input.mx-toggle");
@@ -160,14 +165,15 @@ describe("Slider", () => {
 
         beforeEach(() => {
             sliderProps = {
-                widgetId: "slider",
+                enabled: false,
+                hasError: false,
+                isChecked: true,
                 onClick: () => {
                     sliderProps.isChecked = !sliderProps.isChecked;
                     slider.setProps(sliderProps);
                     checkbox = slider.find("input.mx-toggle");
                 },
-                isChecked: true,
-                enabled: false
+                widgetId: "slider"
             };
 
             slider = shallow(createElement(Slider, sliderProps));
@@ -194,10 +200,11 @@ describe("Slider", () => {
 
             beforeEach(() => {
                 sliderProps = {
-                    widgetId: "slider",
-                    onClick: () => {},
+                    enabled: false,
+                    hasError: false,
                     isChecked: false,
-                    enabled: false
+                    onClick: () => { console.log("clicked"); },
+                    widgetId: "slider"
                 };
                 sliderProps.enabled = false;
                 sliderProps.isChecked = false;

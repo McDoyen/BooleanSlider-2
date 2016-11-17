@@ -2,6 +2,7 @@ import * as dojoDeclare from "dojo/_base/declare";
 import * as WidgetBase from "mxui/widget/_WidgetBase";
 
 import { Slider } from "./components/Slider";
+import { ValidationAlert } from "./components/ValidationAlert";
 import { createElement } from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 
@@ -11,6 +12,7 @@ class BooleanSlider extends WidgetBase {
     onChangeMicroflow: string;
 
     private contextObject: mendix.lib.MxObject;
+    private alertMessage: string;
 
     update(contextObject: mendix.lib.MxObject, callback: Function) {
         this.contextObject = contextObject;
@@ -23,11 +25,14 @@ class BooleanSlider extends WidgetBase {
     updateRendering() {
         if (this.contextObject) {
             render(createElement(Slider, {
-                widgetId: this.id,
-                onClick: (value: boolean) => this.handleToggle(value),
+                enabled: !this.readOnly,
+                hasError: this.alertMessage ? true : false,
                 isChecked: this.contextObject.get(this.booleanAttribute) as boolean,
-                enabled: !this.readOnly
-            }), this.domNode);
+                onClick: (value: boolean) => this.handleToggle(value),
+                widgetId: this.id
+            },
+            this.alertMessage ? createElement(ValidationAlert, { message: this.alertMessage }) : null
+            ), this.domNode);
         }
     }
 
@@ -47,24 +52,49 @@ class BooleanSlider extends WidgetBase {
 
         if (this.contextObject) {
             this.subscribe({
-                attr: this.booleanAttribute,
-                callback: () => this.updateRendering(),
+                callback: () => {
+                    this.alertMessage = null;
+                    this.updateRendering();
+                },
                 guid: this.contextObject.getGuid()
             });
+
+            this.subscribe({
+                attr: this.booleanAttribute,
+                callback: () => {
+                    this.alertMessage = null;
+                    this.updateRendering();
+                },
+                guid: this.contextObject.getGuid()
+            });
+
+            this.subscribe({
+                callback: (validations: mendix.lib.ObjectValidation[]) => this.handleValidations(validations),
+                guid: this.contextObject.getGuid(),
+                val: true
+            });
+        }
+    }
+
+    private handleValidations(validations: mendix.lib.ObjectValidation[]) {
+        const validationMessage = validations[0].getErrorReason(this.booleanAttribute);
+        if (validationMessage) {
+            this.alertMessage = validationMessage;
+            this.updateRendering();
         }
     }
 
     private executeAction(actionname: string, guids: string[]) {
         if (actionname) {
             window.mx.data.action({
+                error: (error: Error) =>
+                    window.mx.ui.error("An error occurred while executing microflow: " + error.message, true),
+                origin: this.mxform,
                 params: {
                     applyto: "selection",
                     actionname,
                     guids
-                },
-                origin: this.mxform,
-                error: (error: Error) =>
-                    window.mx.ui.error("An error occurred while executing microflow: " + error.message, true)
+                }
             });
         }
     }
