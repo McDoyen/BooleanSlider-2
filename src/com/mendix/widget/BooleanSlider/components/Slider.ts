@@ -1,10 +1,12 @@
 import "../ui/Slider.less";
+import * as classNames from "classnames";
 import { DOM } from "react";
 
 interface SliderProps {
     widgetId: string;
     onClick: Function;
     isChecked: boolean;
+    enabled: boolean;
 }
 
 export const Slider = (props: SliderProps) =>
@@ -12,12 +14,12 @@ export const Slider = (props: SliderProps) =>
         DOM.input({
             id: "mx-toggle-" + props.widgetId,
             type: "checkbox",
-            className: "mx-toggle mx-toggle-ios",
+            className: classNames("mx-toggle mx-toggle-ios", { enabled: props.enabled }),
             checked: props.isChecked
         }),
         DOM.label({
             htmlFor: "mx-toggle-" + props.widgetId,
-            className: "mx-toggle-btn",
+            className: classNames("mx-toggle-btn", { enabled: props.enabled }),
             onClick: () => { if (props.onClick) props.onClick(!props.isChecked) }
         })
     );

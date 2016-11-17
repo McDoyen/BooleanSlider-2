@@ -1,5 +1,7 @@
 @checkedColor: #4EC054;
 @uncheckedColor: #F1F1F1;
+@disabledCheckedColor: #F1F1F1;
+@disabledUncheckedColor: #FFF;
 
 .mx-toggle {
     display: none;
@@ -52,7 +54,7 @@
   // themes
 .mx-toggle-ios {
     + .mx-toggle-btn {
-        background: @uncheckedColor;
+        background: @disabledUncheckedColor;
         border-radius: 2em;
         padding: 2px;
         transition: all .4s ease;
@@ -74,15 +76,25 @@
               padding-right: .8em;
             }
         }
+
+        &.enabled {
+            background: @uncheckedColor;
+        }
     }
 
     &:checked + .mx-toggle-btn {
-        background: @checkedColor;
+        background: @disabledCheckedColor;
         &:active {
             box-shadow: none;
             &:after {
               margin-left: -.8em;
             }
+        }
+    }
+
+    &.enabled {
+        &:checked + .mx-toggle-btn {
+            background: @checkedColor;
         }
     }
 }
