@@ -8,7 +8,7 @@ Switch between two states.
 Mendix 6.
 
 ## Demo project
-http://booleanslider.mxapps.io
+http://booleansliderwidge.mxapps.io
 
 ## Disclaimer
 Status: In development
