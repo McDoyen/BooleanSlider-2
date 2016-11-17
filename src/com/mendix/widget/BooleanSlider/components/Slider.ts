@@ -15,7 +15,8 @@ export const Slider = (props: SliderProps) =>
             id: "mx-toggle-" + props.widgetId,
             type: "checkbox",
             className: classNames("mx-toggle", { enabled: props.enabled }),
-            checked: props.isChecked
+            checked: props.isChecked,
+            readOnly: true
         }),
         DOM.label({
             htmlFor: "mx-toggle-" + props.widgetId,
