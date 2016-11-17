@@ -14,7 +14,7 @@ export const Slider = (props: SliderProps) =>
         DOM.input({
             id: "mx-toggle-" + props.widgetId,
             type: "checkbox",
-            className: classNames("mx-toggle mx-toggle-ios", { enabled: props.enabled }),
+            className: classNames("mx-toggle", { enabled: props.enabled }),
             checked: props.isChecked
         }),
         DOM.label({
