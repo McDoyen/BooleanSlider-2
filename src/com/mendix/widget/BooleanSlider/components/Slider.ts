@@ -2,7 +2,7 @@ import "../ui/Slider.less";
 import * as classNames from "classnames";
 import { DOM } from "react";
 
-interface SliderProps {
+export interface SliderProps {
     widgetId: string;
     onClick: Function;
     isChecked: boolean;
@@ -20,7 +20,6 @@ export const Slider = (props: SliderProps) =>
         DOM.label({
             htmlFor: "mx-toggle-" + props.widgetId,
             className: classNames("mx-toggle-btn", { enabled: props.enabled }),
-            onClick: () => { if (props.onClick) props.onClick(!props.isChecked) }
+            onClick: props.enabled ? () => props.onClick(!props.isChecked) : null
         })
     );
-
