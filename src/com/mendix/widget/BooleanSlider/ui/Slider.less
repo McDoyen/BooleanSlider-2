@@ -31,7 +31,7 @@
         width: 5em;
         height: 2.6em;
         position: relative;
-        cursor: pointer;
+        cursor: default;
         user-select: none;
         &:after,
         &:before {
@@ -67,6 +67,7 @@
 
         &.enabled {
             background: @uncheckedColor;
+            cursor: pointer;
         }
     }
 

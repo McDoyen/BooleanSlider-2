@@ -26,7 +26,7 @@ class BooleanSlider extends WidgetBase {
         if (this.contextObject) {
             render(createElement(Slider, {
                 enabled: !this.readOnly && !this.contextObject.isReadonlyAttr(this.booleanAttribute),
-                hasError: this.alertMessage ? true : false,
+                hasError: !!this.alertMessage,
                 isChecked: this.contextObject.get(this.booleanAttribute) as boolean,
                 onClick: (value: boolean) => this.handleToggle(value),
                 widgetId: this.id

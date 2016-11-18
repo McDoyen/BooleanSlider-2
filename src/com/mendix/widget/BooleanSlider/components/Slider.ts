@@ -25,5 +25,5 @@ export const Slider = (props: SliderProps) =>
             htmlFor: "mx-toggle-" + props.widgetId,
             onClick: props.enabled ? () => props.onClick(!props.isChecked) : null
         }),
-        props.children
+        props.hasError ? props.children : null
     );
