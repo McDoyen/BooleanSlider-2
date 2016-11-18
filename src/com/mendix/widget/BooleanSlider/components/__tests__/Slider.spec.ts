@@ -37,6 +37,24 @@ describe("Slider", () => {
         expect(label.props().htmlFor).toBe("mx-toggle-" + sliderProps.widgetId);
         expect(label.hasClass("enabled")).toBe(true);
         expect(typeof label.props().onClick).toBe("function");
+
+        // expect(slider).toBeElement(
+        //     DOM.div({ className: classNames("mx-boolean-slider", { "has-error": sliderProps.hasError }) },
+        //         DOM.input({
+        //             checked: sliderProps.isChecked,
+        //             className: classNames("mx-toggle", { enabled: sliderProps.enabled }),
+        //             id: "mx-toggle-" + sliderProps.widgetId,
+        //             readOnly: true,
+        //             type: "checkbox"
+        //         }),
+        //         DOM.label({
+        //             className: classNames("mx-toggle-btn", { enabled: sliderProps.enabled }),
+        //             htmlFor: "mx-toggle-" + sliderProps.widgetId,
+        //             onClick: sliderProps.enabled ? (event: any) => sliderProps.onClick(true) : null
+        //         }),
+        //         sliderProps.children
+        //     )
+        // );
     });
 
     it("has the class mx-boolean-slider", () => {
