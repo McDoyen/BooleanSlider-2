@@ -94,7 +94,6 @@ describe("Slider", () => {
             label = slider.find("label.mx-toggle-btn");
         });
 
-
         it("renders a checkbox that is also unchecked", () => {
             expect(checkbox.props().checked).toBe(false);
         });

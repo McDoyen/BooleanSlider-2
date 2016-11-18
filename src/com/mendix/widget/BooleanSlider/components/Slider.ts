@@ -1,17 +1,18 @@
 import "../ui/Slider.less";
 import * as classNames from "classnames";
-import { DOM, Props } from "react";
+import { DOM, ReactNode } from "react";
 
-export interface SliderProps extends Props<any> {
+export interface SliderProps {
+    children?: ReactNode;
     widgetId: string;
-    onClick: Function;
     isChecked: boolean;
     enabled: boolean;
     hasError: boolean;
+    onClick(checked: boolean): void;
 }
 
 export const Slider = (props: SliderProps) =>
-    DOM.div({ className: classNames("mx-boolean-slider", { "has-error": props.hasError}) },
+    DOM.div({ className: classNames("mx-boolean-slider", { "has-error": props.hasError }) },
         DOM.input({
             checked: props.isChecked,
             className: classNames("mx-toggle", { enabled: props.enabled }),
