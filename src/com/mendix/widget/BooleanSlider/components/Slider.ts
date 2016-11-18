@@ -7,7 +7,7 @@ export interface SliderProps {
     widgetId: string;
     isChecked: boolean;
     enabled: boolean;
-    hasError: boolean;
+    hasError?: boolean;
     onClick(checked: boolean): void;
 }
 
